@@ -1,0 +1,119 @@
+body{
+    background: linear-gradient( #404040 0%, #313131 19.79%, #181818 100%) fixed;
+    font-family: Montserrat;
+    font-style: normal;
+    color: #ffffff;
+}
+h1{
+    font-weight: 800;
+    font-size: 72px;
+}
+.inputs__body{
+    max-width: 80%;
+    margin: 50px ; 
+    padding: 0px 15px;
+}
+@media (max-width:1250px){
+    .inputs__body{
+        max-width: 970px;
+    }
+}
+@media (max-width:992px){
+    .inputs__body{
+        max-width: 950px;
+    }
+}
+@media (max-width:767px){
+    .inputs__body{
+        max-width: none;
+    }
+}
+.inputs__row{
+    display: flex;
+    margin: 0px -100px;
+}
+.inputs__column{
+    padding: 0px 15px;
+    flex: 0 0 33.333%;
+}
+.inputs-pare{
+    justify-content: center;
+}
+.inputs-pare.title{
+    margin: 0px 0px 30px 0px;
+    display: flex;
+    opacity: 1;
+
+    font-weight: 700;
+    font-size: 48px;
+}
+.inputs-pare.field{
+    text-align: center;
+}
+input[type=text]{
+    max-width: 300px;
+    border: 2px solid #dadada;
+    border-radius: 10px;
+    padding: 5px;
+    
+    background-color : #313131;
+    
+    font-weight: 300;
+    font-size: 48px;
+    color: rgb(255, 255, 255);
+}
+input:focus{
+    outline:none;
+    border-color:#74bb86;
+    box-shadow:0 0 20px #86cc97;
+}
+.result{
+    margin: 65px 0px 0px 70px;
+    text-align: center;
+    font-weight: 800;
+    font-size: 48px;
+}
+.buttons__row{
+    display: flex;
+    margin: 0px 15px;
+    margin: 60px 0px 0px 70px;
+    justify-content: center;
+    text-align: center;
+}
+.buttons__column{
+    padding: 0px 200px;
+    flex: 0 0 50%;
+}
+button{
+    width: 264px;
+    height: 92px;
+    
+    cursor:pointer;
+    
+    margin: auto;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 48px;
+    color:rgb(255, 255, 255);
+    
+    background: #58B660;
+    border-radius: 16px;
+}
+button:hover{
+    box-shadow:0 0 20px #86cc97;
+}
+button:active{
+    box-shadow: 0 5px #474747;
+    transform: translateY(4px);
+}
+.source{
+    margin-top: 26px;
+    margin-left: 40px;
+}
+a{
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    color:rgb(255, 255, 255);
+}
