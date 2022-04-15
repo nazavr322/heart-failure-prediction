@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <script src="https://cdn.jsdelivr.net/npm/brython@3/brython.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/brython@3/brython_stdlib.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+    <link rel="stylesheet" href="css/main.css">
+    <title>Heart Failure Prediction</title>
+</head>
+<body onload="brython()">
+    <div class="inputs">
+        <h1 align="center"> Input data to get a prediction</h1>
+        <div class="inputs__body">
+            <div class="inputs__row">
+                <div class="inputs__column">
+                    <div class="inputs-pare">
+                        <div class="inputs-pare title">
+                            <label for="age">Age</label>
+                        </div>
+                        <div class="inputs-pare field">
+                            <input type="text" name="age" id="age_input">
+                        </div>
+                    </div>
+                </div>
+                <div class="inputs__column">
+                    <div class="inputs-pare">
+                        <div class="inputs-pare title">
+                            <label for="eject">Ejection Fraction</label>
+                        </div>
+                        <div class="inputs-pare field">
+                            <input type="text" name="eject" id="eject_input">
+                        </div>
+                    </div>
+                </div>
+                <div class="inputs__column">
+                    <div class="inputs-pare">
+                        <div class="inputs-pare title">
+                            <label for="serum">Serum Creatinine</label>
+                        </div>
+                        <div class="inputs-pare field">
+                            <input type="text" name="serum" id="serum_input">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="result" id="result">Click 'predict' button!</div>
+            <div class="buttons__row">
+                <button class="buttons_column" id="random_btn">RANDOM</button>
+                <button class="buttons_column" id="pred_btn">PREDICT</button>
+            </div>
+            <div class="source" align="center" >
+                <a href="https://github.com/nazavr322/heart-failure-prediction">See the source code here</a>
+            </div>
+        </div>
+    </div>
+
+    <!--Generation of random numbers-->
+    <script type="text/python" id="rand_script">
+        from browser import document
+        from random import randint, uniform
+
+        def generate(e):
+         document["age_input"].value = str(randint(40, 100))
+         document["eject_input"].value = str(randint(14, 80))
+         document["serum_input"].value = str(round(uniform(0.5, 9.5), 8))
+         
+        document["random_btn"].bind("click", generate)
+     </script>
+
+     <!--Sending request-->
+     <script type="text/python" id="pred_script">
+        from browser import document, ajax
+        import json
+        
+        def on_complete(req):
+         data = json.loads(req.responseText)
+         probability = data["probability"]
+         document["result"].text = f"Probability of mortality by heart failure is {round(probability, 2)}%"
+        
+        def get_prediction(e):
+         req = ajax.ajax()
+         age = int(document["age_input"].value)
+         ejection_fraction = int(document["eject_input"].value)
+         serum_creatinine = float(document["serum_input"].value)
+
+         url = f"https://hfprediction.herokuapp.com/predict?age={age}&ejection_fraction={ejection_fraction}&serum_creatinine={serum_creatinine}"
+         req.open("GET", url, True)
+         req.bind("complete", on_complete)
+         document["result"].text = "Loading..."
+         req.send()
+        
+        document["pred_btn"].bind("click", get_prediction)
+      </script>
+</body>
+</html>
