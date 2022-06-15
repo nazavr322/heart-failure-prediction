@@ -19,7 +19,7 @@ You can see all the steps in the `test.ipynb` file.
 In the table below all models are sorted by the F-0.5 Score and PR AUC.
 
 | | F-0.5 Score | ROC AUC | PR AUC |
-| |    :---:    |  :---:  | :---:  |
+| :---: |   :---:    |  :---:  | :---:  |
 | **LogisticRegression** | 0.615301 | 0.793269 | 0.679791 | 
 | **SVC** | 0.600834 | 0.795072 | 0.677686 |    
 | **MultinomialNB** | 0.579207 | 0.783053 | 0.663107 |  
